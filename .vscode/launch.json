@@ -1,0 +1,29 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "automation web",
+            "type": "python",
+            "request": "launch",
+            "program": "${cwd}/automation_web.py",
+            "args": [
+                "--web",
+                "--excel-persist"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "automation local",
+            "type": "python",
+            "request": "launch",
+            "program": "${cwd}/automation_web.py",
+            "args": [],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        }
+    ]
+}

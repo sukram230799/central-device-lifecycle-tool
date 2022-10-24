@@ -1,0 +1,47 @@
+<html>
+
+<head>
+    <script src="/app/socket.js" defer></script>
+    <link rel="stylesheet" href="/app/style.css" />
+    <title>Decomission</title>
+</head>
+
+<body>
+    <div class="flex-holder">
+
+        <div class="flex">
+            <div class="box box-big">Decomission</div>
+        </div>
+
+        <div class="flex">
+            <div class="box box-big status" id="status-box">Status</div>
+        </div>
+        <div class="flex">
+            <div class="box box-big serial" id="sn-box">---</div>
+        </div>
+        <div class="flex">
+            <div class="box log">
+                <h2>Log</h2>
+                <div id="log-box">
+
+                </div>
+
+            </div>
+        </div>
+        <div class="flex">
+            <div class="box box-big">
+                <input id="sn-input" type="text" placeholder="Serial Number" />
+                <button class="button" id="submit-button">Ok</button>
+            </div>
+        </div>
+
+        <div class="flex box-big">
+            <div class="box">
+                <a class="button" id="excel-button" download>Excel</a>
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

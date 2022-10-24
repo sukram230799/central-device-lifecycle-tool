@@ -1,0 +1,28 @@
+# Used to build python packages
+wheel
+
+# Decorest used for Rest-API via decorators
+# Use git repo URL for up-to-date code
+git+https://github.com/sukram230799/decorest.git@7fa2def75996bd9530234b02291937411790bbb0
+# decorest
+
+# For typing
+typing_extensions
+
+# Our http client library
+httpx
+
+# Excel API
+openpyxl
+
+# Big console font
+pyfiglet
+
+# Console argument parser
+argparse
+
+# For web api
+asyncio
+# websockets
+aiohttp
+
