@@ -2,6 +2,7 @@ const EMPTY_SERIAL = "---";
 const STATUS_LIST = ['status-red', 'status-green', 'status-orange', 'status-grey'];
 
 const snInput = document.getElementById('sn-input');
+const unlicenseCheckBox = document.getElementById('unlicense-checkbox');
 const submitButton = document.getElementById('submit-button');
 const excelButton = document.getElementById('excel-button');
 
@@ -9,10 +10,19 @@ const serialBox = document.getElementById('sn-box');
 const logBox = document.getElementById('log-box');
 const statusBox = document.getElementById('status-box');
 
+if (window.location.pathname.startsWith('/app/firmware/')) {
+    firmware = true;
+    decomission = false;
+}
+else if (window.location.pathname.startsWith('/app/decomission')) {
+    decomission = true;
+    firmware = false;
+}
+
 let socket;
-if (window.location.pathname.startsWith('/app/firmware/'))
+if (firmware)
     socket = new WebSocket("ws://" + location.host + "/firmware/ws");
-else if (window.location.pathname.startsWith('/app/decomission'))
+else if (decomission)
     socket = new WebSocket("ws://" + location.host + "/decomission/ws");
 
 let downloaded = true;
@@ -115,7 +125,10 @@ function submitSerial() {
 
 function sendSerial(serial) {
     console.log(serial);
-    socket.send(JSON.stringify({ type: 'serial', value: serial }));
+    message = { type: 'serial', value: serial }
+    if (decomission)
+        message.unlicense = unlicenseCheckBox.value === 'on'
+    socket.send(JSON.stringify(message));
 }
 
 

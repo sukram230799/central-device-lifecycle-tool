@@ -86,3 +86,8 @@ input[type=text] {
     background-color: #4CAF50;
     color: white;
 }
+
+label {
+    font-size: medium;
+    font-weight: normal;
+}
