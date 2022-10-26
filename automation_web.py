@@ -10,6 +10,7 @@ from uuid import uuid4
 from decorest import (GET, PATCH, POST, PUT, HTTPErrorWrapper, RestClient,
                       accept, backend, body, content, endpoint, on, query,
                       timeout)
+from CentralAPI.APIKeySetupAndCheck import APIKeySetupAndCheck
 from Decomission.CentralDecomission import CentralDecomission
 from Decomission.DECWebsocketHandler import DECWebsocketHandler
 from Decomission.DecomissionExcelHandler import DecomissionExcelHandler
@@ -116,6 +117,10 @@ def main():
     endpoint_file = args.endpoint_file  # "./endpoint.json"
     client_id_file = args.client_id_file  # "./client_id.json"
     credential_file = args.credential_file  # "./credential.json"
+
+    APIKeySetupAndCheck(endpoint_file=endpoint_file,
+           client_id_file=client_id_file,
+           credential_file=credential_file).check_and_wait_create()
 
     excel_file = None
     excel_dir = None

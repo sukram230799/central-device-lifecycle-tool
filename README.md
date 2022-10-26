@@ -4,7 +4,11 @@ Tool to handle task relating to de-/comissioning of devices and upgrading firmwa
 
 ## Requirements + Environment Setup
 
-Check for python using `python` or `python3`. Python3.x is required.
+Check for python using `python --version` or `python3 --version`. Python3.x is required and installed in path.
+
+### Easy Setup + Start
+
+Use `install.bat` to setup environment (Python in path required). Use `start-web.bat` to start the app and configure credentials.
 
 ### Virtual Environment
 
@@ -39,7 +43,7 @@ source ./venv/bin/activate
 ## Install
 
 ``` sh
-python -m install -r requirements
+python -m pip install -r requirements.txt
 ```
 
 ## Usage
