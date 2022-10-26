@@ -5,3 +5,7 @@ __pycache__/
 *endpoint*.json
 playground/
 out/*
+/*.xlsx
+automation.py
+automation_simple.py
+/*.zip
