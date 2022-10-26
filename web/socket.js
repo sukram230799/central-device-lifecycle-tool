@@ -32,7 +32,6 @@ socket.onopen = function (e) {
 };
 
 socket.onmessage = function (event) {
-    // alert(`[message] Data received from server: ${event.data}`);
     console.log(event.data);
     message = JSON.parse(event.data);
 
@@ -85,6 +84,8 @@ function setStatus(message) {
     statusBox.innerText = message.value;
 }
 
+// Local display functions
+
 function appendLog(message) {
     logBox.innerText += "\n" + message.value;
 }
@@ -101,22 +102,26 @@ function setExcel(message) {
     excelButton.href = message.value;
 }
 
+// Websocket close and error handling
+
 socket.onclose = function (event) {
     clear();
     setStatus({ value: 'DISCONNECTED', color: 'red' });
     if (event.wasClean) {
-        // alert(`[close] Connection closed cleanly, code=${event.code} reason=${event.reason}`);
+        log(`[close] Connection closed cleanly, code=${event.code} reason=${event.reason}`);
     } else {
         // e.g. server process killed or network down
         // event.code is usually 1006 in this case
-        // alert('[close] Connection died');
+        log('[close] Connection died');
     }
 };
 
 socket.onerror = function (error) {
     appendLog(error.message);
-    // alert(`[error] ${error.message}`);
+    log(`[error] ${error.message}`);
 };
+
+// Serial number handling
 
 function submitSerial() {
     sendSerial(snInput.value);
@@ -131,6 +136,7 @@ function sendSerial(serial) {
     socket.send(JSON.stringify(message));
 }
 
+// Eventlisteners
 
 snInput.addEventListener("keypress", function (event) {
     if (event.key === "Enter") {
@@ -140,7 +146,6 @@ snInput.addEventListener("keypress", function (event) {
     }
 });
 
-
 submitButton.addEventListener("click", (event) => {
     submitSerial();
 });
@@ -149,15 +154,10 @@ excelButton.addEventListener("click", (event) => {
     downloaded = true;
 });
 
-// excelButton.addEventListener("click", function (event) {
-
-// })
-
 window.addEventListener('beforeunload', function (e) {
     if (!downloaded) {
         e.returnValue = 'Test';
         e.preventDefault();
     }
 });
-
 
