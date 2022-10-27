@@ -50,7 +50,12 @@ python -m pip install -r requirements.txt
 
 ### Access Token + Endpoint
 
-![Endpoint](./screenshots/Central/Credentials.png)
+#### Endpoint
+
+![Endpoint](./screenshots/Central/Endpoint.png)
+
+#### Credentials
+
 ![Credentials](./screenshots/Central/Credentials.png)
 
 #### endpoint.json
@@ -99,8 +104,22 @@ python -m pip install -r requirements.txt
 
 ## Screenshots (Web)
 
+### Wait for update to complete
+
 ![Wait for update to complete](./screenshots/Firmware/Wait.png)
+
+### Device (currently) not known in Central
+
 ![Device not known in Central](./screenshots/Firmware/NotInCentral.png)
+
+### Device not known. Second scan, refresh gateway
+
 ![Device not known in Central - Refresh List drilldown](./screenshots/Firmware/NotInCentralDrillDown.png)
+
+### Invalid Serial Number
+
 ![Serial Number invalid](./screenshots/Firmware/Serial.png)
+
+### Drilldown for device upgrade state
+
 ![Drilldown for device upgrade state](./screenshots/Firmware/DrillDown.png)
