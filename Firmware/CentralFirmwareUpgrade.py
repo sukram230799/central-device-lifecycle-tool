@@ -1,4 +1,5 @@
 from typing import Dict
+import typing
 
 from CentralAPI.CentralAPI import Central
 from Communication.CommunicationHandler import CommunicationHandler
@@ -9,7 +10,7 @@ class CentralFirmwareUpgrade:
     def __init__(self,
                  central_client: Central,
                  group,
-                 target_firmware: str | None = None):
+                 target_firmware: typing.Union[str, None] = None):
         self.gateway_dict = {}  # List with all gateways and state
 
         self.central_client = central_client  # Central API Provider
@@ -56,8 +57,8 @@ class CentralFirmwareUpgrade:
 
     async def refresh_gateways(self,
                                *,
-                               comm_handler: CommunicationHandler
-                               | None = None):
+                               comm_handler: typing.Union[CommunicationHandler,
+                                                          None] = None):
         """
         Refresh local gateway list in `self.gateway_dict` from central
         """

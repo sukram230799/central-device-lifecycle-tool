@@ -2,6 +2,7 @@ import asyncio
 import re
 from datetime import datetime
 from typing import TypedDict
+import typing
 
 from aiohttp import web
 from Communication.CommunicationHandler import CommunicationHandler
@@ -13,10 +14,12 @@ from Decomission.DecomissionExcelHandler import DecomissionExcelHandler
 
 class DecomissionHandler():
 
-    def __init__(self,
+    def __init__(
+        self,
                  cen_dec: CentralDecomission,
                  comm_handler: CommunicationHandler,
-                 excel_handler: DecomissionExcelHandler | None = None) -> None:
+        excel_handler: typing.Union[DecomissionExcelHandler,
+                                    None] = None) -> None:
         self.cen_dec = cen_dec
         self.comm_handler = comm_handler
         self.excel_handler = excel_handler

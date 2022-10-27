@@ -47,8 +47,9 @@ class CentralDecomission():
 
         return devices_dict
 
-    async def refresh_devices(self, *, comm_handler: CommunicationHandler
-                              | None):
+    async def refresh_devices(self, *,
+                              comm_handler: typing.Union[CommunicationHandler,
+                                                         None]):
         """
         Refresh local devices list in `self.devices_dict` from central
         """
@@ -67,7 +68,7 @@ class CentralDecomission():
         return serial in self.device_dict
 
     async def get_device_type(self, *, comm_handler: CommunicationHandler,
-                              serial: str) -> str | None:
+                              serial: str) -> typing.Union[str, None]:
         if serial not in self.device_dict.keys():
             return None
         if 'device_type' not in self.device_dict[serial].keys():
@@ -114,7 +115,7 @@ class CentralDecomission():
 
     async def get_device_services(
             self, *, comm_handler: CommunicationHandler,
-            serial: str) -> typing.List[CENTRAL_SERVICES] | None:
+            serial: str) -> typing.Union[typing.List[CENTRAL_SERVICES], None]:
         if serial not in self.device_dict.keys():
             return None
         if 'services' not in self.device_dict[serial].keys():
@@ -129,8 +130,7 @@ class CentralDecomission():
         *,
         comm_handler: CommunicationHandler,
         serial: str,
-        services: typing.List[CENTRAL_SERVICES]
-        | None = None
+        services: typing.Union[typing.List[CENTRAL_SERVICES], None] = None
     ) -> Tuple[bool, dict]:
         if not services:
             services = await self.get_device_services(

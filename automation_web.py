@@ -210,7 +210,7 @@ def main():
 
 
 async def local_firmware_check(cfu: CentralFirmwareUpgrade,
-                               excel_file: str | None = None):
+                               excel_file: typing.Union[str, None] = None):
     # For logs to excel
     excel_handler = None
     if excel_file:
@@ -233,7 +233,7 @@ async def local_firmware_check(cfu: CentralFirmwareUpgrade,
 
 
 async def local_decomission(cen_dec: CentralDecomission,
-                            excel_file: str | None = None):
+                            excel_file: typing.Union[str, None] = None):
     # For logs to excel
     excel_handler = None
     if excel_file:

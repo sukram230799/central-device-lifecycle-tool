@@ -1,4 +1,5 @@
 import json
+import typing
 from uuid import uuid4
 
 from aiohttp import web, web_ws
@@ -15,8 +16,8 @@ class FWWebsocketHandler():
 
     def __init__(self,
                  cfu: CentralFirmwareUpgrade,
-                 excel_dir: str | None = None,
-                 download_url: str | None = None,
+                 excel_dir: typing.Union[str, None] = None,
+                 download_url: typing.Union[str, None] = None,
                  excel_persist: bool = False) -> None:
         self.cfu = cfu
         self.excel_dir = excel_dir

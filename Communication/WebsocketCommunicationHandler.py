@@ -31,7 +31,7 @@ class WebsocketCommunicationHandler(CommunicationHandler):
         await self.send_serial(serial)
         self.print('Serial', serial)
 
-    async def print_excel(self, prefix: str | None, filename: str | None):
+    async def print_excel(self, prefix: typing.Union[str, None], filename: typing.Union[str, None]):
         if filename and prefix:
             path = '/'.join(os.path.split(prefix)) + '/' + filename
             path = path.replace('//', '/')
@@ -40,7 +40,7 @@ class WebsocketCommunicationHandler(CommunicationHandler):
             return await self.send_excel(filename)
 
     async def send_status(self, status, color):
-        #   additional_data: typing.Mapping | None = None):
+        #   additional_data: typing.Union[typing.Mapping , None]  = None):
         data = {
             'type': 'status',
             'value': status,

@@ -1,5 +1,6 @@
 import asyncio
 import re
+import typing
 
 from aiohttp import web, web_ws
 from Communication.CommunicationHandler import CommunicationHandler
@@ -11,10 +12,12 @@ from Firmware.FirmwareExcelHandler import FirmwareExcelHandler
 
 class FirmwareUpgradeHandler():
 
-    def __init__(self,
+    def __init__(
+        self,
                  cfu: CentralFirmwareUpgrade,
                  comm_handler: CommunicationHandler,
-                 excel_handler: FirmwareExcelHandler | None = None) -> None:
+        excel_handler: typing.Union[FirmwareExcelHandler,
+                                    None] = None) -> None:
         self.cfu = cfu
         self.comm_handler = comm_handler
         self.excel_handler = excel_handler

@@ -27,8 +27,8 @@ class Central(RestClient):
     @query('offset')
     @query('calculate_total')
     async def get_gateways(self,
-                           limit: int | None = 1000,
-                           offset: int | None = None,
+                           limit: typing.Union [int , None] = 1000,
+                           offset: typing.Union [int , None] = None,
                            calculate_total: bool = True) -> typing.Dict:
         """
         Get gateways. You can only specify one of group, label parameters.
