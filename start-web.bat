@@ -1,5 +1,17 @@
-call venv/Scripts/activate
+@echo off
 
-python automation_web.py --web
+IF EXIST automation_web.exe (
+    echo Compiled
+    IF EXIST out (
+        echo Setup okay
+    ) ELSE (
+        mkdir out
+    )
+    automation_web.exe --web
+) ELSE (
+    echo Script
+    call venv/Scripts/activate
+    python automation_web.py --web
+)
 
 pause

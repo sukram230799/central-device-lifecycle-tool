@@ -9,3 +9,4 @@ out/*
 automation.py
 automation_simple.py
 /*.zip
+/output/
