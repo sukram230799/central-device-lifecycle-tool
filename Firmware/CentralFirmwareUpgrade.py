@@ -63,7 +63,7 @@ class CentralFirmwareUpgrade:
         Refresh local gateway list in `self.gateway_dict` from central
         """
         if comm_handler:
-            await comm_handler.print_log('Refreshing gateway list')
+            await comm_handler.print_log(_('Refreshing gateway list'))
         self.gateway_dict = await self.get_gateways()
 
     async def is_device_in_central(self, *, comm_handler: CommunicationHandler,
@@ -73,7 +73,7 @@ class CentralFirmwareUpgrade:
 
         Retruns `true` if `serial` found in central.
         """
-        await comm_handler.print_log(f'{serial} - device in central?')
+        await comm_handler.print_log(_('{serial} - device in central?').format(serial=serial))
         return serial in self.gateway_dict
 
     async def is_device_in_group(self, *, comm_handler: CommunicationHandler,
@@ -83,7 +83,7 @@ class CentralFirmwareUpgrade:
         
         Returns `true` if `serial` has the correct group associated.
         """
-        await comm_handler.print_log(f'{serial} - device in group?')
+        await comm_handler.print_log(_('{serial} - device in group?').format(serial=serial))
         if serial not in self.gateway_dict: return None
         return self.gateway_dict[serial]['group_name'] == self.group
 
@@ -95,7 +95,7 @@ class CentralFirmwareUpgrade:
 
         Returns `true` if firmware is known.
         """
-        await comm_handler.print_log(f'{serial} - is firmware known?')
+        await comm_handler.print_log(_('{serial} - is firmware known?').format(serial=serial))
         if serial in self.gateway_dict:
             return not self.gateway_dict[serial][
                 'firmware_version'] == 'Unknown'
@@ -107,7 +107,7 @@ class CentralFirmwareUpgrade:
 
         Returns `true` if device is online.
         """
-        await comm_handler.print_log(f'{serial} - online?')
+        await comm_handler.print_log(_('{serial} - online?').format(serial=serial))
         if serial in self.gateway_dict:
             return not self.gateway_dict[serial]['status'] == 'Down'
 
@@ -119,7 +119,7 @@ class CentralFirmwareUpgrade:
         Returns `true` if move has been initiated.
         """
         await comm_handler.print_log(
-            f'{serial} - Move device to group {self.group}')
+            _('{serial} - Move device to group {group}').format(serial=serial, group=self.group))
         result = await self.central_client.move_to_group({
             'group':
             self.group,
@@ -136,7 +136,7 @@ class CentralFirmwareUpgrade:
         """
         Local return of the device firmware version found in `self.gateway_dict`.
         """
-        await comm_handler.print_log(f'{serial} - get fw version local')
+        await comm_handler.print_log(_('{serial} - get fw version local').format(serial=serial))
         if serial not in self.gateway_dict: return None
         return self.gateway_dict[serial]['firmware_version']
 
@@ -149,7 +149,7 @@ class CentralFirmwareUpgrade:
 
         Returns `true` if the device has the correct firmware version.
         """
-        await comm_handler.print_log(f'{serial} - Check fw version')
+        await comm_handler.print_log(_('{serial} - Check fw version').format(serial=serial))
         if self.target_firmware == await self.get_device_firmware(
                 comm_handler=comm_handler, serial=serial):
             return True
@@ -157,7 +157,7 @@ class CentralFirmwareUpgrade:
         # Not currently up to date -> refreshing from central
         await self.refresh_gateways(comm_handler=comm_handler)
 
-        await comm_handler.print_log(f'{serial} - Check fw version again!')
+        await comm_handler.print_log(_('{serial} - Check fw version again!').format(serial=serial))
         return self.target_firmware == await self.get_device_firmware(
             comm_handler=comm_handler, serial=serial)
 
@@ -173,7 +173,7 @@ class CentralFirmwareUpgrade:
         - Queued request to upgrade firmware
         - No Update from the device. Please check the status after sometime
         """
-        await comm_handler.print_log(f'{serial} - Escalate fw status')
+        await comm_handler.print_log(_('{serial} - Escalate fw status').format(serial=serial))
 
         return (await self.central_client.get_firmware_status(serial=serial
                                                               ))['reason']

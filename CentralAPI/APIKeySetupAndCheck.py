@@ -17,15 +17,15 @@ class APIKeySetupAndCheck():
     def check_and_wait_create(self):
         while not self.check_endpoint():
             while not self.create_endpoint():
-                print('Failed')
+                print(_('Failed'))
         while not self.check_client_id():
             while not self.create_client_id():
-                print('Failed')
+                print(_('Failed'))
         while not self.check_credential():
             while not self.create_credential():
-                print('Failed')
+                print(_('Failed'))
 
-        print('Endpoint, Client_ID and Credential exist. Continue')
+        print(_('Endpoint, Client_ID and Credential exist. Continue'))
         return True
 
     def check_endpoint(self) -> bool:
@@ -63,7 +63,7 @@ class APIKeySetupAndCheck():
 
     def create_endpoint(self) -> bool:
         try:
-            print('Please paste an endpoint name.')
+            print(_('Please paste an endpoint name.'))
             url = str(input()).strip()
             with open(self.endpoint_file, 'w') as f:
                 endpoint = {"name": "AUTO GENERATED", "base_url": url}
@@ -77,9 +77,9 @@ class APIKeySetupAndCheck():
 
     def create_client_id(self) -> bool:
         try:
-            print('Please paste the client id.')
+            print(_('Please paste the client id.'))
             client_id = str(input()).strip()
-            print('Please paste the client secret.')
+            print(_('Please paste the client secret.'))
             client_secret = str(input()).strip()
             with open(self.client_id_file, 'w') as f:
                 client_id_data = {
@@ -97,8 +97,8 @@ class APIKeySetupAndCheck():
     def create_credential(self) -> bool:
         try:
             print(
-                'Please paste the full credential file from central. Then enter until okay.'
-            )
+                _('Please paste the full credential file from central. Then enter until okay.'
+                  ))
 
             credential_json = self.json_import()
             with open(self.credential_file, 'w') as f:

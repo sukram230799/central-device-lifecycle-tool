@@ -16,8 +16,8 @@ class DecomissionHandler():
 
     def __init__(
         self,
-                 cen_dec: CentralDecomission,
-                 comm_handler: CommunicationHandler,
+        cen_dec: CentralDecomission,
+        comm_handler: CommunicationHandler,
         excel_handler: typing.Union[DecomissionExcelHandler,
                                     None] = None) -> None:
         self.cen_dec = cen_dec
@@ -47,18 +47,19 @@ class DecomissionHandler():
             # 2nd run
             if options['unlicense']:
                 await self.comm_handler.print_log(
-                    f'{serial} Unasign license option activated. Device will also be deleted'
-                )
+                    _('{serial} - Unasign license option activated. Device will also be deleted'
+                      ).format(serial=serial))
                 await self.unasign_device(serial)
             else:
                 await self.comm_handler.print_log(
-                    f'{serial} Delete device option activated. License will be kept'
-                )
+                    _('{serial} - Delete device option activated. License will be kept'
+                      ).format(serial=serial))
                 await self.delete_device(serial)
 
         else:
             # 1st run
-            await self.comm_handler.print_log(f'{serial} Check Central')
+            await self.comm_handler.print_log(
+                _('{serial} - Check Central').format(serial=serial))
             self.in_central = await self.check_central(serial)
 
         # Save last serial
@@ -101,16 +102,18 @@ class DecomissionHandler():
         success, out = await self.cen_dec.unassign_subscription(
             comm_handler=self.comm_handler, serial=serial)
         await self.comm_handler.print_log(
-            f'{serial} unsubscribed: {success}, {out}')
+            _('{serial} unsubscribed {success}, {out}').format(serial=serial,
+                                                               success=success,
+                                                               out=out))
         if success:
-            await self.comm_handler.print_status(message='Unsubscribed',
+            await self.comm_handler.print_status(message=_('Unsubscribed'),
                                                  color='green')
             if self.excel_handler:
                 self.excel_handler.update_status(
                     serial=serial, state={'unsubscribed_on': datetime.now()})
         else:
-            await self.comm_handler.print_status(message='Subscription Error',
-                                                 color='red')
+            await self.comm_handler.print_status(
+                message=_('Subscription Error'), color='red')
             if self.excel_handler:
                 self.excel_handler.update_status(
                     serial=serial, state={'unsubscribed_on': 'ERROR'})
@@ -135,7 +138,7 @@ class DecomissionHandler():
 
         Notify client and log to excel.
         """
-        await self.comm_handler.print_status(message='Not in Central',
+        await self.comm_handler.print_status(message=_('Not in Central'),
                                              color='red')
         if self.excel_handler:
             self.excel_handler.update_status(
@@ -147,7 +150,8 @@ class DecomissionHandler():
 
         Notify client and log date to excel
         """
-        await self.comm_handler.print_status(message='Deleted', color='green')
+        await self.comm_handler.print_status(message=_('Deleted'),
+                                             color='green')
         if self.excel_handler:
             self.excel_handler.update_status(
                 serial=serial, state={'deleted_on': datetime.now()})
@@ -158,7 +162,7 @@ class DecomissionHandler():
 
         Notify client and log ERROR to excel
         """
-        await self.comm_handler.print_status(message='Deletion aborted',
+        await self.comm_handler.print_status(message=_('Deletion aborted'),
                                              color='green')
         if self.excel_handler:
             self.excel_handler.update_status(serial=serial,

@@ -1,3 +1,14 @@
+import gettext
+import locale
+
+localedir = './locale'
+
+translate_de = gettext.translation('messages', localedir, languages=['de'])
+# translate_en = gettext.translation('messages', localedir, languages=['en'])
+
+translate_de.install()
+locale.setlocale(locale.LC_ALL, 'de_DE.UTF-8')
+
 from cgitb import enable
 from http import client
 import json
@@ -53,64 +64,65 @@ def main():
     global args
 
     parser = argparse.ArgumentParser(
-        description='Check Gateway Fírmware status.')
+        description=_('Check Gateway Fírmware status.'))
     parser.add_argument('-w',
                         '--web',
-                        help='Launch using web api and interface',
+                        help=_('Launch using web api and interface'),
                         action='store_true')
     parser.add_argument(
         '--console',
-        help='Lauch locally using a simplistic command line interface',
+        help=_('Lauch locally using a simplistic command line interface'),
         action='store_true',
         default=True)
     parser.add_argument('--web-port',
                         type=int,
                         default=8080,
-                        help='Specify the port for webserver')
+                        help=_('Specify the port for webserver'))
     parser.add_argument('--web-address',
                         type=str,
                         default='127.0.0.1',
-                        help='Specify the address for webserver')
+                        help=_('Specify the address for webserver'))
     parser.add_argument(
         '--firmware',
         help=
-        'Override target firmware for the device. **CAUTION** does not set the version in central - So it might not match and therefore throw errors'
-    )
+        _('Override target firmware for the device. **CAUTION** does not set the version in central - So it might not match and therefore throw errors'
+          ))
     parser.add_argument('--group',
                         default='default',
-                        help='Group for the devices in central')
+                        help=_('Group for the devices in central'))
     parser.add_argument('--client-id-file',
                         '-i',
-                        help='Client id file',
+                        help=_('Client id file'),
                         default='client_id.json')
     parser.add_argument('--credential-file',
                         '-c',
-                        help='Client id file',
+                        help=_('Client id file'),
                         default='credential.json')
     parser.add_argument('--endpoint-file',
                         '-e',
-                        help='Client id file',
+                        help=_('Client id file'),
                         default='endpoint.json')
     parser.add_argument('--no-excel',
                         action='store_false',
                         dest='excel',
-                        help='Enable excel module')
+                        help=_('Enable excel module'))
     parser.add_argument('--excel-file',
                         default='log.xlsx',
-                        help='Excel log file')
-    parser.add_argument('--excel-dir',
-                        default='./out',
-                        help='Path for excel files to be stored for download')
+                        help=_('Excel log file'))
+    parser.add_argument(
+        '--excel-dir',
+        default='./out',
+        help=_('Path for excel files to be stored for download'))
     parser.add_argument(
         '--download-url',
         default='/out',
-        help='URL from which the excel download will be served')
+        help=_('URL from which the excel download will be served'))
     parser.add_argument(
         '--excel-persist',
         action='store_true',
         help=
-        'Instead of deleteing the excel file after a session completes keep it'
-    )
+        _('Instead of deleteing the excel file after a session completes keep it'
+          ))
 
     args = parser.parse_args()
 
@@ -118,9 +130,10 @@ def main():
     client_id_file = args.client_id_file  # "./client_id.json"
     credential_file = args.credential_file  # "./credential.json"
 
-    APIKeySetupAndCheck(endpoint_file=endpoint_file,
-           client_id_file=client_id_file,
-           credential_file=credential_file).check_and_wait_create()
+    APIKeySetupAndCheck(
+        endpoint_file=endpoint_file,
+        client_id_file=client_id_file,
+        credential_file=credential_file).check_and_wait_create()
 
     excel_file = None
     excel_dir = None
@@ -158,7 +171,7 @@ def main():
 
     # Check if we should provide the web interface
     if args.web:
-        print('Running in web mode')
+        print(_('Running in web mode'))
         app = web.Application()
 
         routes = [
@@ -194,19 +207,31 @@ def main():
         app.router.add_routes(routes)
         web.run_app(app, host=args.web_address, port=args.web_port)
     elif args.console:
-        print('Running in local mode')
+        print(_('Running in local mode'))
 
-        asyncio.run(local_decomission(
-            cen_dec=cen_dec,
-            excel_file=excel_file,
-        ))
+        print(
+            _('Decomission {decomission} or Firmware {firmware}').format(
+                decomission='d', firmware='f'))
+        mode = ''
+        while mode not in ['f', 'd']:
+            mode = input('d/f: ')
+            print(_('Operation mode unknown'))
 
-        # asyncio.run(local_firmware_check(
-        #     cfu=cfu,
-        #     excel_file=excel_file,
-        # ))
+        if mode == 'd':
+            asyncio.run(
+                local_decomission(
+                    cen_dec=cen_dec,
+                    excel_file=excel_file,
+                ))
+        elif mode == 'f':
+            asyncio.run(local_firmware_check(
+                cfu=cfu,
+                excel_file=excel_file,
+            ))
 
-    print('Please specify either --web or --console')
+        print(_('Operation mode unknown'))
+
+    print(_('Please specify either --web or --console'))
 
 
 async def local_firmware_check(cfu: CentralFirmwareUpgrade,
@@ -227,7 +252,7 @@ async def local_firmware_check(cfu: CentralFirmwareUpgrade,
     while True:
 
         await comm_handler.print_log()
-        await comm_handler.print_log('Serial Number')
+        await comm_handler.print_log(_('Serial Number'))
 
         await client_handler.handle_input(serial=str(input()).strip())
 
@@ -250,7 +275,7 @@ async def local_decomission(cen_dec: CentralDecomission,
 
     while True:
         await comm_handler.print_log()
-        await comm_handler.print_log('Serial Number')
+        await comm_handler.print_log(_('Serial Number'))
 
         await client_handler.handle_input(serial=str(input()).strip(),
                                           options={'unlicense': False})

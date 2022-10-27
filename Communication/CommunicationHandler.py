@@ -26,7 +26,7 @@ class CommunicationHandler():
     async def print_serial(self, serial: str):
         print(serial)
 
-    async def print_excel(self, prefix: str | None, filename: str | None):
+    async def print_excel(self, prefix: typing.Union[str, None], filename: typing.Union[str, None]):
         if prefix and filename:
             print(f'Excel: {os.path.join(prefix, filename)}')
         if filename:

@@ -14,8 +14,8 @@ class FirmwareUpgradeHandler():
 
     def __init__(
         self,
-                 cfu: CentralFirmwareUpgrade,
-                 comm_handler: CommunicationHandler,
+        cfu: CentralFirmwareUpgrade,
+        comm_handler: CommunicationHandler,
         excel_handler: typing.Union[FirmwareExcelHandler,
                                     None] = None) -> None:
         self.cfu = cfu
@@ -49,7 +49,8 @@ class FirmwareUpgradeHandler():
         if await self.cfu.is_device_in_central(comm_handler=self.comm_handler,
                                                serial=serial):
             # Device found locally. Continue
-            await self.comm_handler.print_log(f'{serial} is in Central')
+            await self.comm_handler.print_log(
+                _('{serial} is in Central').format(serial=serial))
         elif escalate:
             # Device not found locally. BUT force escalation
             # Refresh gateway list
@@ -58,30 +59,33 @@ class FirmwareUpgradeHandler():
             if await self.cfu.is_device_in_central(
                     comm_handler=self.comm_handler, serial=serial):
                 # Device found in central continue
-                await self.comm_handler.print_log(f'{serial} is in Central')
+                await self.comm_handler.print_log(
+                    _('{serial} is in Central').format(serial=serial))
             else:
                 # Device not found in Central. Abort
                 await self.comm_handler.print_log(
-                    (f'{serial} currently not known in Central'))
+                    _('{serial} currently not known in Central').format(
+                        serial=serial))
 
                 await self.comm_handler.print_log()
                 if self.excel_handler:
                     self.excel_handler.update_status(serial=serial,
                                                      status='Not in central')
-                await self.comm_handler.print_status('Not in Central',
+                await self.comm_handler.print_status(_('Not in Central'),
                                                      color='orange')
                 return  # ABORT
 
         else:
             # Locally not found. Notify user. Abort for now
             await self.comm_handler.print_log(
-                (f'{serial} currently not known in Central'))
+                _('{serial} currently not known in Central').format(
+                    serial=serial))
 
             await self.comm_handler.print_log()
             if self.excel_handler:
                 self.excel_handler.update_status(serial=serial,
                                                  status='Not in central')
-            await self.comm_handler.print_status('Not in Central',
+            await self.comm_handler.print_status(_('Not in Central'),
                                                  color='orange')
             return  # ABORT
 
@@ -91,11 +95,13 @@ class FirmwareUpgradeHandler():
         if await self.cfu.is_device_version_knwon(
                 comm_handler=self.comm_handler, serial=serial):
             # Known. Continue
-            await self.comm_handler.print_log(f'{serial} version is known')
+            await self.comm_handler.print_log(
+                _('{serial} version is known').format(serial=serial))
         else:
             # Unknown. Abort
             await self.comm_handler.print_log(
-                f'{serial} version could not be determined. Is device online?')
+                _('{serial} version could not be determined. Is device online?'
+                  ).format(serial=serial))
             await self.comm_handler.print_status('Version Unknown',
                                                  color='red')
 
@@ -104,10 +110,12 @@ class FirmwareUpgradeHandler():
                 await self.comm_handler.print_status('Device Offline',
                                                      color='red')
                 await self.comm_handler.print_log(
-                    f'{serial} is offline. Please connect and wait...')
+                    _('{serial} is offline. Please connect and wait...').
+                    format(serial=serial))
             else:
                 await self.comm_handler.print_log(
-                    f'{serial} online. But version unknown ¯\\_(ツ)_/¯')
+                    _('{serial} is online. But version unknown ¯\\_(ツ)_/¯').
+                    format(serial=serial))
 
             return  # ABORT
 
@@ -115,10 +123,12 @@ class FirmwareUpgradeHandler():
         if await self.cfu.is_device_in_group(comm_handler=self.comm_handler,
                                              serial=serial):
             # Device in correct group. Continue
-            await self.comm_handler.print_log(f'{serial} is in correct group')
+            await self.comm_handler.print_log(
+                _('{serial} is in correct group').format(serial=serial))
         else:
             # Device not in correct group. Move and abort further action
-            await self.comm_handler.print_log(f'{serial} is in wrong group')
+            await self.comm_handler.print_log(
+                _('{serial} is in wrong group').format(serial=serial))
 
             await self.comm_handler.print_log()
             if self.excel_handler:
@@ -146,7 +156,8 @@ class FirmwareUpgradeHandler():
         if await self.cfu.check_device_firmware(comm_handler=self.comm_handler,
                                                 serial=serial):
             # Device on target firmware
-            await self.comm_handler.print_log(f'{serial} is up-to-date')
+            await self.comm_handler.print_log(
+                _('{serial} is up-to-date').format(serial=serial))
             await self.comm_handler.print_log()
             if self.excel_handler:
                 # Save current firmware to excel
@@ -157,7 +168,8 @@ class FirmwareUpgradeHandler():
             await self.comm_handler.print_status('Ok', color='green')
 
         elif escalate:  # Escalate look at the central fw status info
-            await self.comm_handler.print_log(f'{serial} - Escalating')
+            await self.comm_handler.print_log(
+                _('{serial} - Escalating').format(serial=serial))
             await self.comm_handler.print_log(
                 await self.cfu.escalate_firmware_status(
                     comm_handler=self.comm_handler, serial=serial))
@@ -175,8 +187,8 @@ class FirmwareUpgradeHandler():
             await self.comm_handler.print_status('Wait', color='orange')
             await self.comm_handler.print_log()
             await self.comm_handler.print_log(
-                f'{serial} not up-to-date. Check later or escalate by scanning again!'
-            )
+                _('{serial} not up-to-date. Check later or escalate by scanning again!'
+                  ).format(serial=serial))
 
         return
 

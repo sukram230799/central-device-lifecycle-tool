@@ -1,0 +1,342 @@
+# German translations for PACKAGE package.
+# Copyright (C) 2022 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#  <markus.wuest@hpe.com>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-10-27 12:03+0200\n"
+"PO-Revision-Date: 2022-10-27 12:04+0200\n"
+"Last-Translator: markus.wuest@hpe.com\n"
+"Language-Team: German\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.2\n"
+
+#: CentralAPI/APIKeySetupAndCheck.py:20 CentralAPI/APIKeySetupAndCheck.py:23
+#: CentralAPI/APIKeySetupAndCheck.py:26
+msgid "Failed"
+msgstr "Fehlgeschlagen"
+
+#: CentralAPI/APIKeySetupAndCheck.py:28
+msgid "Endpoint, Client_ID and Credential exist. Continue"
+msgstr "Endpoint, Client_ID and Credential vorhanden. Weiter"
+
+#: CentralAPI/APIKeySetupAndCheck.py:66
+msgid "Please paste an endpoint name."
+msgstr "Bitte fügen Sie einen Endpunktnamen ein."
+
+#: CentralAPI/APIKeySetupAndCheck.py:80
+msgid "Please paste the client id."
+msgstr "Bitte fügen Sie die client id ein."
+
+#: CentralAPI/APIKeySetupAndCheck.py:82
+msgid "Please paste the client secret."
+msgstr "Bitte fügen Sie das client secret ein."
+
+#: CentralAPI/APIKeySetupAndCheck.py:100
+msgid ""
+"Please paste the full credential file from central. Then enter until okay."
+msgstr ""
+"Bitte fügen Sie die vollständige Anmeldedatei aus Central ein. Geben Sie "
+"dann Enter/neue Zeile ein, bis okay erscheint."
+
+#: Decomission/CentralDecomission.py:68
+#, python-brace-format
+msgid "{serial} - Device in central?"
+msgstr "{serial} - Gerät in Central?"
+
+#: Decomission/CentralDecomission.py:79
+#, python-brace-format
+msgid "{serial} is {device_type}"
+msgstr "{serial} ist {device_type}"
+
+#: Decomission/CentralDecomission.py:88
+#, python-brace-format
+msgid "{serial} - Device Type not known. Aborting"
+msgstr "{serial} - Geräte Typ/Device Type unbekannt. Abbrechen"
+
+#: Decomission/CentralDecomission.py:94
+#, python-brace-format
+msgid "{serial} - Delete Gateway"
+msgstr "{serial} - Gateway löschen"
+
+#: Decomission/CentralDecomission.py:98
+#, python-brace-format
+msgid "{serial} - Deleted Gateway"
+msgstr "{serial} - Gateway gelöscht"
+
+#: Decomission/CentralDecomission.py:105 Decomission/CentralDecomission.py:112
+#: Decomission/CentralDecomission.py:118
+#, python-brace-format
+msgid "{serial} - Device Type {device_type} not supported. Aborting"
+msgstr "{serial} - Gerätetyp {device_type} nicht unterstützt. Abbrechen"
+
+#: Decomission/CentralDecomission.py:133
+#, python-brace-format
+msgid "{serial} has those services: {device_services}"
+msgstr "{serial} hat folgende Dienste/Services: {device_services}"
+
+#: Decomission/DecomissionHandler.py:50
+#, python-brace-format
+msgid ""
+"{serial} - Unasign license option activated. Device will also be deleted"
+msgstr "{serial} - Lizenz entfernen aktiviert. Gerät wird auch gelöscht"
+
+#: Decomission/DecomissionHandler.py:55
+#, python-brace-format
+msgid "{serial} - Delete device option activated. License will be kept"
+msgstr "{serial} - Gerät löschen aktiviert. Lizenz wird beibehalten"
+
+#: Decomission/DecomissionHandler.py:62
+#, python-brace-format
+msgid "{serial} - Check Central"
+msgstr "{serial} - Ist Gerät in Central"
+
+#: Decomission/DecomissionHandler.py:105
+#, python-brace-format
+msgid "{serial} unsubscribed {success}, {out}"
+msgstr "Lizenz für {serial} entfernt {success}, {out}"
+
+#: Decomission/DecomissionHandler.py:109
+msgid "Unsubscribed"
+msgstr "Lizenz entfernt"
+
+#: Decomission/DecomissionHandler.py:116
+msgid "Subscription Error"
+msgstr "Lizenzfehler"
+
+#: Decomission/DecomissionHandler.py:141 Firmware/FirmwareUpgradeHandler.py:74
+#: Firmware/FirmwareUpgradeHandler.py:88
+msgid "Not in Central"
+msgstr "Nicht in Central"
+
+#: Decomission/DecomissionHandler.py:153
+msgid "Deleted"
+msgstr "Gelöscht"
+
+#: Decomission/DecomissionHandler.py:165
+msgid "Deletion aborted"
+msgstr "Löschen abgebrochen"
+
+#: Firmware/CentralFirmwareUpgrade.py:66
+msgid "Refreshing gateway list"
+msgstr "Gatewayliste aktualisieren"
+
+#: Firmware/CentralFirmwareUpgrade.py:76
+#, python-brace-format
+msgid "{serial} - device in central?"
+msgstr "{serial} - Gerät in Central?"
+
+#: Firmware/CentralFirmwareUpgrade.py:86
+#, python-brace-format
+msgid "{serial} - device in group?"
+msgstr "{serial} - Gerät in Gruppe?"
+
+#: Firmware/CentralFirmwareUpgrade.py:98
+#, python-brace-format
+msgid "{serial} - is firmware known?"
+msgstr "{serial} - Firmware bekannt?"
+
+#: Firmware/CentralFirmwareUpgrade.py:110
+#, python-brace-format
+msgid "{serial} - online?"
+msgstr "{serial} - Online?"
+
+#: Firmware/CentralFirmwareUpgrade.py:122
+#, python-brace-format
+msgid "{serial} - Move device to group {group}"
+msgstr "{serial} - Gerät in Gruppe {group} verschieben"
+
+#: Firmware/CentralFirmwareUpgrade.py:139
+#, python-brace-format
+msgid "{serial} - get fw version local"
+msgstr "{serial} - FW Version lokal erhalten"
+
+#: Firmware/CentralFirmwareUpgrade.py:152
+#, python-brace-format
+msgid "{serial} - Check fw version"
+msgstr "{serial} - FW Version überprüfen"
+
+#: Firmware/CentralFirmwareUpgrade.py:160
+#, python-brace-format
+msgid "{serial} - Check fw version again!"
+msgstr "{serial} - FW Version erneut überprüfen!"
+
+#: Firmware/CentralFirmwareUpgrade.py:176
+#, python-brace-format
+msgid "{serial} - Escalate fw status"
+msgstr "{serial} - FW Status eskalieren"
+
+#: Firmware/FirmwareUpgradeHandler.py:53 Firmware/FirmwareUpgradeHandler.py:63
+#, python-brace-format
+msgid "{serial} is in Central"
+msgstr "{serial} Ist in Central"
+
+#: Firmware/FirmwareUpgradeHandler.py:67 Firmware/FirmwareUpgradeHandler.py:81
+#, python-brace-format
+msgid "{serial} currently not known in Central"
+msgstr "{serial} aktuell nicht in Central bekannt"
+
+#: Firmware/FirmwareUpgradeHandler.py:99
+#, python-brace-format
+msgid "{serial} version is known"
+msgstr "{serial} Firmware ist bekannt"
+
+#: Firmware/FirmwareUpgradeHandler.py:103
+#, python-brace-format
+msgid "{serial} version could not be determined. Is device online?"
+msgstr "{serial} Version konnte nicht gefunden werden. Ist das Gerät online?"
+
+#: Firmware/FirmwareUpgradeHandler.py:113
+#, python-brace-format
+msgid "{serial} is offline. Please connect and wait..."
+msgstr "{serial} ist offline. Bitte verbinden und warten..."
+
+#: Firmware/FirmwareUpgradeHandler.py:117
+#, python-brace-format
+msgid "{serial} is online. But version unknown ¯\\_(ツ)_/¯"
+msgstr "{serial} ist online. Aber Version nicht bekannt ¯\\_(ツ)_/¯"
+
+#: Firmware/FirmwareUpgradeHandler.py:127
+#, python-brace-format
+msgid "{serial} is in correct group"
+msgstr "{serial} Gerät ist in korrekter Gruppe"
+
+#: Firmware/FirmwareUpgradeHandler.py:131
+#, python-brace-format
+msgid "{serial} is in wrong group"
+msgstr "{serial} Gerät ist in falscher Gruppe"
+
+#: Firmware/FirmwareUpgradeHandler.py:160
+#, python-brace-format
+msgid "{serial} is up-to-date"
+msgstr "{serial} ist aktuell"
+
+#: Firmware/FirmwareUpgradeHandler.py:172
+#, python-brace-format
+msgid "{serial} - Escalating"
+msgstr "{serial} - Eskalieren"
+
+#: Firmware/FirmwareUpgradeHandler.py:190
+#, python-brace-format
+msgid "{serial} not up-to-date. Check later or escalate by scanning again!"
+msgstr ""
+"{serial} ist nicht aktuell. Später versuchen oder mit wiederholtem Scannen "
+"eskalieren!"
+
+#: automation_web.py:69
+msgid "Check Gateway Fírmware status."
+msgstr "Gateway Firmware überprüfen."
+
+#: automation_web.py:72
+msgid "Launch using web api and interface"
+msgstr "Mit Webapi und Weboberfläche starten"
+
+#: automation_web.py:76
+msgid "Lauch locally using a simplistic command line interface"
+msgstr "Lokal mit primitiver Textoberfläche starten"
+
+#: automation_web.py:82
+msgid "Specify the port for webserver"
+msgstr "Port des Webservers"
+
+#: automation_web.py:86
+msgid "Specify the address for webserver"
+msgstr "Adresse des Webservers"
+
+#: automation_web.py:90
+msgid ""
+"Override target firmware for the device. **CAUTION** does not set the "
+"version in central - So it might not match and therefore throw errors"
+msgstr ""
+"Ziel Firmware Version überschreiben. **ACHTUNG** falls diese nicht mit der "
+"Version in Central übereinstimmt kommt es zu Fehlern"
+
+#: automation_web.py:94
+msgid "Group for the devices in central"
+msgstr "Central Gruppe der Geräte"
+
+#: automation_web.py:97 automation_web.py:101 automation_web.py:105
+msgid "Client id file"
+msgstr "Client Id Datei"
+
+#: automation_web.py:110
+msgid "Enable excel module"
+msgstr "Excelmodus aktivieren"
+
+#: automation_web.py:113
+msgid "Excel log file"
+msgstr "Execeldatei"
+
+#: automation_web.py:117
+msgid "Path for excel files to be stored for download"
+msgstr ""
+"Pfad für Excel-Dateien, die zum Herunterladen zwischengespeichert werden "
+"sollen"
+
+#: automation_web.py:121
+msgid "URL from which the excel download will be served"
+msgstr "URL von der aus die Excel Dateien heruntergeladen werden können"
+
+#: automation_web.py:126
+msgid "Instead of deleteing the excel file after a session completes keep it"
+msgstr "Excel Dateien behalten anstatt diese nach der Nutzersession zu löschen"
+
+#: automation_web.py:176
+msgid "Running in web mode"
+msgstr "Im Webmodus gestartet"
+
+#: automation_web.py:212
+msgid "Running in local mode"
+msgstr "Im lokalen Modus gestartet"
+
+#: automation_web.py:215
+#, python-brace-format
+msgid "Decomission {decomission} or Firmware {firmware}"
+msgstr "Dekomissionierund {decomission} oder Firmware {firmware}"
+
+#: automation_web.py:220 automation_web.py:234
+msgid "Operation mode unknown"
+msgstr "Operationsmodus unbekannt"
+
+#: automation_web.py:236
+msgid "Please specify either --web or --console"
+msgstr "Entweder --web oder --console angeben"
+
+#: automation_web.py:257 automation_web.py:280
+msgid "Serial Number"
+msgstr "Seriennummer"
+
+#~ msgid "Decomission (d) or Firmware (f)"
+#~ msgstr "Dekomissionierund (d) oder Firmware (f)"
+
+#~ msgid "Check Central"
+#~ msgstr "Auf Central überprüfen"
+
+#~ msgid "is"
+#~ msgstr "ist"
+
+#~ msgid "Device Type not known. Aborting"
+#~ msgstr "Geräte Typ/Device Type unbekannt. Abbrechen"
+
+#~ msgid "Delete Gateway"
+#~ msgstr "Gateway löschen"
+
+#~ msgid "Deleted Gateway"
+#~ msgstr "Gateway gelöscht"
+
+#, python-brace-format
+#~ msgid "Device Type {device_type} not supported. Aborting"
+#~ msgstr "Gerätetyp {device_type} wird nicht unterstützt. Abbrechen"
+
+#~ msgid "unsubscribed"
+#~ msgstr "Lizenz entfernt"
+
+#~ msgid "Device Type SWITCH not supported. Aborting"
+#~ msgstr "Geräte"

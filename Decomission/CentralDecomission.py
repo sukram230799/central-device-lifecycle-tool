@@ -64,7 +64,8 @@ class CentralDecomission():
 
         Retruns `true` if `serial` found in central.
         """
-        await comm_handler.print_log(f'{serial} - Device in central?')
+        await comm_handler.print_log(
+            _('{serial} - Device in central?').format(serial=serial))
         return serial in self.device_dict
 
     async def get_device_type(self, *, comm_handler: CommunicationHandler,
@@ -74,7 +75,8 @@ class CentralDecomission():
         if 'device_type' not in self.device_dict[serial].keys():
             return None
         device_type = self.device_dict[serial]['device_type']
-        await comm_handler.print_log(f'{serial} is {device_type}')
+        await comm_handler.print_log(
+            _('{serial} is {device_type}').format(serial=serial, device_type=device_type))
         return device_type
 
     async def delete_device(self, *, comm_handler: CommunicationHandler,
@@ -83,32 +85,38 @@ class CentralDecomission():
                                                  serial=serial)
         if not device_type:
             await comm_handler.print_log(
-                f'{serial} - Device Type not known. Aborting')
+                _('{serial} - Device Type not known. Aborting').format(
+                    serial=serial))
             return False
 
         if device_type.upper() == 'GATEWAY':
-            await comm_handler.print_log(f'{serial} - Delete Gateway')
+            await comm_handler.print_log(
+                _('{serial} - Delete Gateway').format(serial=serial))
             success = self.central_client.delete_gateway(serial)
             #, proxies="http://localhost:8080", verify=None)
-            await comm_handler.print_log(f'{serial} - Deleted Gateway')
+            await comm_handler.print_log(
+                _('{serial} - Deleted Gateway').format(serial=serial))
 
             # TODO: Handle out
             return success
 
         if device_type.upper() == 'SWITCH':
             await comm_handler.print_log(
-                f'{serial} - Device Type SWITCH not supported. Aborting')
+                _('{serial} - Device Type {device_type} not supported. Aborting'
+                  ).format(serial=serial, device_type=device_type))
             return False
             raise NotImplementedError()
 
         if device_type.upper() == 'AP':
             await comm_handler.print_log(
-                f'{serial} - Device Type AP not supported. Aborting')
+                _('{serial} - Device Type {device_type} not supported. Aborting'
+                  ).format(serial=serial, device_type=device_type))
             return False
             raise NotImplementedError()
 
         await comm_handler.print_log(
-            f'{serial} - Device Type {device_type} not supported. Aborting')
+            _('{serial} - Device Type {device_type} not supported. Aborting').
+            format(serial=serial, device_type=device_type))
         return False
 
         raise NotImplementedError()
@@ -122,7 +130,8 @@ class CentralDecomission():
             return None
         device_services = self.device_dict[serial]['services']
         await comm_handler.print_log(
-            f'{serial} has those services: {device_services}')
+            _('{serial} has those services: {device_services}').format(
+                serial=serial, device_services=device_services))
         return device_services
 
     async def unassign_subscription(
