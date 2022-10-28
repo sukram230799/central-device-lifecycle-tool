@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-10-27 12:03+0200\n"
-"PO-Revision-Date: 2022-10-27 12:04+0200\n"
+"PO-Revision-Date: 2022-10-28 13:04+0200\n"
 "Last-Translator: markus.wuest@hpe.com\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -28,8 +28,8 @@ msgid "Endpoint, Client_ID and Credential exist. Continue"
 msgstr "Endpoint, Client_ID and Credential vorhanden. Weiter"
 
 #: CentralAPI/APIKeySetupAndCheck.py:66
-msgid "Please paste an endpoint name."
-msgstr "Bitte fügen Sie einen Endpunktnamen ein."
+msgid "Please paste an endpoint URL."
+msgstr "Bitte fügen Sie eine Endpunkt URL ein."
 
 #: CentralAPI/APIKeySetupAndCheck.py:80
 msgid "Please paste the client id."

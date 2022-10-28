@@ -1,48 +1,28 @@
 import gettext
 import locale
-
-localedir = './locale'
-
-translate_de = gettext.translation('messages', localedir, languages=['de'])
-# translate_en = gettext.translation('messages', localedir, languages=['en'])
-
-translate_de.install()
-locale.setlocale(locale.LC_ALL, 'de_DE.UTF-8')
-
-from cgitb import enable
-from http import client
-import json
-from multiprocessing.spawn import import_main_path
-
-import typing
-
-from uuid import uuid4
-
-from decorest import (GET, PATCH, POST, PUT, HTTPErrorWrapper, RestClient,
-                      accept, backend, body, content, endpoint, on, query,
-                      timeout)
-from CentralAPI.APIKeySetupAndCheck import APIKeySetupAndCheck
-from Decomission.CentralDecomission import CentralDecomission
-from Decomission.DECWebsocketHandler import DECWebsocketHandler
-from Decomission.DecomissionExcelHandler import DecomissionExcelHandler
-from Decomission.DecomissionHandler import DecomissionHandler, redir_handler as dec_redir_handler
-from Firmware.FWWebsocketHandler import FWWebsocketHandler
-
-from CentralTokenAuth.CentralTokenAuth import CentralTokenAuth
+import os
 
 import argparse
-
 import asyncio
-
 import json
-from aiohttp import web, web_ws
+import typing
 
-from Firmware.FirmwareExcelHandler import FirmwareExcelHandler
+from aiohttp import web
+
+from CentralAPI.APIKeySetupAndCheck import APIKeySetupAndCheck
 from CentralAPI.CentralAPI import Central
+from CentralTokenAuth.CentralTokenAuth import CentralTokenAuth
 from Communication.CommunicationHandler import CommunicationHandler
-from Communication.WebsocketCommunicationHandler import WebsocketCommunicationHandler
+from Decomission.CentralDecomission import CentralDecomission
+from Decomission.DecomissionExcelHandler import DecomissionExcelHandler
+from Decomission.DecomissionHandler import DecomissionHandler
+from Decomission.DecomissionHandler import redir_handler as dec_redir_handler
+from Decomission.DECWebsocketHandler import DECWebsocketHandler
 from Firmware.CentralFirmwareUpgrade import CentralFirmwareUpgrade
-from Firmware.FirmwareUpgradeHandler import FirmwareUpgradeHandler, redir_handler as fw_redir_handler
+from Firmware.FirmwareExcelHandler import FirmwareExcelHandler
+from Firmware.FirmwareUpgradeHandler import FirmwareUpgradeHandler
+from Firmware.FirmwareUpgradeHandler import redir_handler as fw_redir_handler
+from Firmware.FWWebsocketHandler import FWWebsocketHandler
 
 args = None
 
@@ -63,6 +43,18 @@ class WebRoot():
 def main():
     global args
 
+    # Localization
+    localedir = './locale'
+    translate_de = gettext.translation('messages', localedir, languages=['de'])
+    translate_en = gettext.translation('messages', localedir, languages=['en'])
+
+    if 'LANG' in os.environ and 'de' in os.environ['LANG']:
+        translate_de.install()
+        locale.setlocale(locale.LC_ALL, 'de_DE.UTF-8')
+    else:
+        translate_en.install()
+
+    # Arguments Parsing
     parser = argparse.ArgumentParser(
         description=_('Check Gateway Fírmware status.'))
     parser.add_argument('-w',
@@ -123,8 +115,15 @@ def main():
         help=
         _('Instead of deleteing the excel file after a session completes keep it'
           ))
+    parser.add_argument('--lang', help=_('Language option'))
 
     args = parser.parse_args()
+
+    if 'de' == args.lang:
+        translate_de.install()
+        locale.setlocale(locale.LC_ALL, 'de_DE.UTF-8')
+    elif 'en' == args.lang:
+        translate_en.install()
 
     endpoint_file = args.endpoint_file  # "./endpoint.json"
     client_id_file = args.client_id_file  # "./client_id.json"
@@ -166,8 +165,12 @@ def main():
                                  group=group,
                                  target_firmware=target_firmware)
 
+    # Local Decomissioning module
     cen_dec = CentralDecomission(central_client=central_client,
                                  device_type='all')
+
+    # cen_com = CentralComisison(central_client=central_client,
+    #                              device_type='all')
 
     # Check if we should provide the web interface
     if args.web:

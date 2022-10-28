@@ -27,7 +27,7 @@ msgid "Endpoint, Client_ID and Credential exist. Continue"
 msgstr ""
 
 #: CentralAPI/APIKeySetupAndCheck.py:66
-msgid "Please paste an endpoint name."
+msgid "Please paste an endpoint URL."
 msgstr ""
 
 #: CentralAPI/APIKeySetupAndCheck.py:80

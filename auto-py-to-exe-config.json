@@ -84,6 +84,10 @@
   {
    "optionDest": "datas",
    "value": "./start-web.bat;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "./locale;locale/"
   }
  ],
  "nonPyinstallerOptions": {
