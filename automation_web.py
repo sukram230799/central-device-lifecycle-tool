@@ -17,12 +17,12 @@ from Decomission.CentralDecomission import CentralDecomission
 from Decomission.DecomissionExcelHandler import DecomissionExcelHandler
 from Decomission.DecomissionHandler import DecomissionHandler
 from Decomission.DecomissionHandler import redir_handler as dec_redir_handler
-from Decomission.DECWebsocketHandler import DECWebsocketHandler
+from Decomission.DecomissionWSHandler import DecomissionWSHandler
 from Firmware.CentralFirmwareUpgrade import CentralFirmwareUpgrade
 from Firmware.FirmwareExcelHandler import FirmwareExcelHandler
 from Firmware.FirmwareUpgradeHandler import FirmwareUpgradeHandler
 from Firmware.FirmwareUpgradeHandler import redir_handler as fw_redir_handler
-from Firmware.FWWebsocketHandler import FWWebsocketHandler
+from Firmware.FirmwareWSHandler import FirmwareWSHandler
 
 args = None
 
@@ -181,7 +181,7 @@ def main():
             web.static('/app', './web', show_index=True),
             web.get(
                 '/firmware/ws',
-                FWWebsocketHandler(
+                FirmwareWSHandler(
                     cfu=cfu,
                     excel_dir=excel_dir,
                     download_url=download_url,
@@ -189,7 +189,7 @@ def main():
             web.get('/firmware', fw_redir_handler),
             web.get(
                 '/decomission/ws',
-                DECWebsocketHandler(
+                DecomissionWSHandler(
                     cen_dec=cen_dec,
                     excel_dir=excel_dir,
                     download_url=download_url,

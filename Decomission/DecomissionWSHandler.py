@@ -12,7 +12,7 @@ from Decomission.DecomissionExcelHandler import DecomissionExcelHandler
 from Decomission.DecomissionHandler import DecomissionHandler
 
 
-class DECWebsocketHandler():
+class DecomissionWSHandler():
 
     def __init__(self,
                  cen_dec: CentralDecomission,

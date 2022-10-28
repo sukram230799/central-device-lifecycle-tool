@@ -12,7 +12,7 @@ from Firmware.FirmwareExcelHandler import FirmwareExcelHandler
 from Firmware.FirmwareUpgradeHandler import FirmwareUpgradeHandler
 
 
-class FWWebsocketHandler():
+class FirmwareWSHandler():
 
     def __init__(self,
                  cfu: CentralFirmwareUpgrade,
