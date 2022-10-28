@@ -63,7 +63,7 @@ class APIKeySetupAndCheck():
 
     def create_endpoint(self) -> bool:
         try:
-            print(_('Please paste an endpoint name.'))
+            print(_('Please paste an endpoint URL.'))
             url = str(input()).strip()
             with open(self.endpoint_file, 'w') as f:
                 endpoint = {"name": "AUTO GENERATED", "base_url": url}
