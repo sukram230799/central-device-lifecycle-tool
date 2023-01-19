@@ -12,8 +12,6 @@
             "args": [
                 "--web",
                 "--excel-persist",
-                "--open-browser",
-                // "--web-port=23700"
             ],
             "console": "integratedTerminal",
             "justMyCode": true

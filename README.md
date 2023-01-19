@@ -1,6 +1,6 @@
 # Central Device Lifecycle Tool
 
-Tool to handle task relating to de-/comissioning of devices and upgrading firmware.
+Tool to handle tasks relating to upgrading firmware and de-/comissioning of devices.
 
 ## Requirements + Environment Setup
 
