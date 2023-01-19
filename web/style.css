@@ -3,10 +3,6 @@ body {
     background-color: #cccccc;
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
-    background-image: url('aruba_hp_lockup_140x68-01.svg');
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-attachment: fixed;
 }
 
 .flex-holder {}

@@ -11,7 +11,9 @@
             "program": "${cwd}/automation_web.py",
             "args": [
                 "--web",
-                "--excel-persist"
+                "--excel-persist",
+                "--open-browser",
+                // "--web-port=23700"
             ],
             "console": "integratedTerminal",
             "justMyCode": true
