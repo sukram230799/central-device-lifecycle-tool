@@ -4,7 +4,7 @@ import typing
 
 from aiohttp import web, web_ws
 from Communication.CommunicationHandler import CommunicationHandler
-from Generics.ArubaSerial import validate_sn
+from Helper.ArubaSerial import validate_sn
 
 from Firmware.CentralFirmwareUpgrade import CentralFirmwareUpgrade
 from Firmware.FirmwareExcelHandler import FirmwareExcelHandler

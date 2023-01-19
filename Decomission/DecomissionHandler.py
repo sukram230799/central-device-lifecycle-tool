@@ -6,7 +6,7 @@ import typing
 
 from aiohttp import web
 from Communication.CommunicationHandler import CommunicationHandler
-from Generics.ArubaSerial import validate_sn
+from Helper.ArubaSerial import validate_sn
 
 from Decomission.CentralDecomission import CentralDecomission
 from Decomission.DecomissionExcelHandler import DecomissionExcelHandler
@@ -73,19 +73,19 @@ class DecomissionHandler():
             # Device found
             await self.notify_device_is_in_central(serial)
 
-        else:
-            # Device not found
-            # Refresh the local cache to look again
-            await self.cen_dec.refresh_devices(comm_handler=self.comm_handler)
+        # else: Refreshing is taking too long...
+        #     # Device not found
+        #     # Refresh the local cache to look again
+        #     await self.cen_dec.refresh_devices(comm_handler=self.comm_handler)
 
-            in_central = await self.cen_dec.is_device_in_central(
-                comm_handler=self.comm_handler, serial=serial)
-            if in_central:
-                # Device found
-                await self.notify_device_is_in_central(serial)
-            else:
-                # Device not found. Even though we refreshed
-                await self.notify_device_not_in_central(serial)
+        #     in_central = await self.cen_dec.is_device_in_central(
+        #         comm_handler=self.comm_handler, serial=serial)
+        #     if in_central:
+        #         # Device found
+        #         await self.notify_device_is_in_central(serial)
+        #     else:
+        #         # Device not found. Even though we refreshed
+        #         await self.notify_device_not_in_central(serial)
 
         return in_central
 
@@ -163,7 +163,7 @@ class DecomissionHandler():
         Notify client and log ERROR to excel
         """
         await self.comm_handler.print_status(message=_('Deletion aborted'),
-                                             color='green')
+                                             color='red')
         if self.excel_handler:
             self.excel_handler.update_status(serial=serial,
                                              state={'deleted_on': 'ERROR'})

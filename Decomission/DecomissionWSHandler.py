@@ -54,7 +54,7 @@ class DecomissionWSHandler():
                                             excel_handler=excel_handler)
 
         async for msg in ws:
-            # print(msg)
+            print('DEC', msg)
             if msg.type == web_ws.WSMsgType.TEXT:
                 # print(msg.data)
                 if msg.data == 'close':

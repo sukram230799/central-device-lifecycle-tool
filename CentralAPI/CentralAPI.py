@@ -27,8 +27,8 @@ class Central(RestClient):
     @query('offset')
     @query('calculate_total')
     async def get_gateways(self,
-                           limit: typing.Union [int , None] = 1000,
-                           offset: typing.Union [int , None] = None,
+                           limit: typing.Union[int, None] = 1000,
+                           offset: typing.Union[int, None] = None,
                            calculate_total: bool = True) -> typing.Dict:
         """
         Get gateways. You can only specify one of group, label parameters.
@@ -131,9 +131,9 @@ class Central(RestClient):
     @accept('application/json')
     @on(200, lambda r: r.json())
     def get_firmware_compliance(
-            self, group: str,
-            device_type: typing.Literal['IAP', 'MAS', 'HP',
-                                        'CONTROLLER']) -> typing.Dict:
+        self, group: str, device_type: typing.Literal['IAP', 'MAS', 'HP',
+                                                      'CONTROLLER']
+    ) -> typing.Dict:
         """
         To get firmware compliance version for specific device_type, for customer.
 
@@ -159,6 +159,7 @@ class Central(RestClient):
         }
 
     @GET('platform/device_inventory/v1/devices')
+    @timeout(60) # This endpoint is really slow
     @query('sku_type')
     @query('limit')
     @query('offset')

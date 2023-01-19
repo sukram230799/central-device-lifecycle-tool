@@ -74,6 +74,7 @@ def main():
                         type=str,
                         default='127.0.0.1',
                         help=_('Specify the address for webserver'))
+    parser.add_argument('--open-browser', action='store_true')
     parser.add_argument(
         '--firmware',
         help=
@@ -147,6 +148,8 @@ def main():
     group = args.group
     target_firmware = args.firmware
 
+    open_browser = args.open_browser
+
     # Extract base_url from endpoint configuration file
     base_url = None
     with open(endpoint_file, 'r') as f:
@@ -208,6 +211,9 @@ def main():
         if excel_dir and download_url:
             routes.append(web.static(download_url, excel_dir), )
         app.router.add_routes(routes)
+        if open_browser:
+            import webbrowser
+            webbrowser.open("http://{args.web_address}:{args.web_port}")
         web.run_app(app, host=args.web_address, port=args.web_port)
     elif args.console:
         print(_('Running in local mode'))

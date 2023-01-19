@@ -66,6 +66,7 @@ class CentralDecomission():
         """
         await comm_handler.print_log(
             _('{serial} - Device in central?').format(serial=serial))
+        # return True #TODO: REMOVE
         return serial in self.device_dict
 
     async def get_device_type(self, *, comm_handler: CommunicationHandler,

@@ -132,7 +132,7 @@ function sendSerial(serial) {
     console.log(serial);
     message = { type: 'serial', value: serial }
     if (decomission)
-        message.unlicense = unlicenseCheckBox.value === 'on'
+        message.unlicense = unlicenseCheckBox.checked;
     socket.send(JSON.stringify(message));
 }
 

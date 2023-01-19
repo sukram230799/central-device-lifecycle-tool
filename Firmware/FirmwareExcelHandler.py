@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from Generics.GenericExcelHandler import GenericExcelHandler
+from GenericExcelHandler.GenericExcelHandler import GenericExcelHandler
 from openpyxl.styles.numbers import FORMAT_DATE_DATETIME
 
 
