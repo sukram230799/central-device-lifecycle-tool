@@ -3,6 +3,8 @@
 echo Check Python
 python --version
 
+echo Install virtualenv
+python -m pip install virtualenv
 
 echo Setup virtualenv
 python -m virtualenv venv
@@ -16,6 +18,5 @@ python -m pip install -r requirements.txt
 echo.
 echo Done
                                  
-
 
 pause

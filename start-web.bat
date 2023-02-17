@@ -11,7 +11,7 @@ IF EXIST automation_web.exe (
 ) ELSE (
     echo Script
     call venv/Scripts/activate.bat
-    python automation_web.py --web --open-browser
+    python automation_web.py --web
 )
 
 pause

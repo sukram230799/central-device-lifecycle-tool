@@ -10,3 +10,5 @@ automation.py
 automation_simple.py
 /*.zip
 /output/
+/dist/
+/build/
