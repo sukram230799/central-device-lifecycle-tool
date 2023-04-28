@@ -4,11 +4,13 @@ Tool to handle tasks relating to upgrading firmware and de-/comissioning of devi
 
 ## Requirements + Environment Setup
 
-Check for python using `python --version` or `python3 --version`. Python3.x is required and installed in path.
+Check for python using `python --version` or `python3 --version`. Python3.x is required and must be installed in the path.
+
+Git is also needed for a custom library to handle the API calls to central. Screenshots for the install can be found [here](./INSTALL.md)
 
 ### Easy Setup + Start
 
-Use `install.bat` to setup environment (Python in path required). Use `start-web.bat` to start the app and configure credentials.
+Use `setup.bat` to setup environment (Python in path required). Use `start-web.bat` to start the app and configure credentials.
 
 ### Virtual Environment
 
