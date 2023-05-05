@@ -6,11 +6,11 @@ Tool to handle tasks relating to upgrading firmware and de-/comissioning of devi
 
 Check for python using `python --version` or `python3 --version`. Python3.x is required and must be installed in the path.
 
-Git is also needed for a custom library to handle the API calls to central. Screenshots for the install can be found [here](./INSTALL.md)
+Git is also needed for a custom library to handle the API calls to Central. Screenshots for the entire setup can be found [here](./INSTALL.md).
 
 ### Easy Setup + Start
 
-Use `setup.bat` to setup environment (Python in path required). Use `start-web.bat` to start the app and configure credentials.
+Use `setup.bat` to setup environment (Python in path required). Use `start-web.bat` to start the app and configure credentials. Screenshots for the setup can be found [here](./INSTALL.md#tool).
 
 ### Virtual Environment
 
@@ -48,53 +48,11 @@ source ./venv/bin/activate
 python -m pip install -r requirements.txt
 ```
 
+## API Setup
+
+To setup the tool you need API-Credentials from Central. You can view the process [here](./API-Key.md).
+
 ## Usage
-
-### Access Token + Endpoint
-
-#### Endpoint
-
-![Endpoint](./screenshots/Central/Endpoint.png)
-
-#### Credentials
-
-![Credentials](./screenshots/Central/Credentials.png)
-
-#### endpoint.json
-
-``` json
-{
-    "name": "Central",
-    "base_url": "https://...-apigw.central.arubanetworks.com"
-}
-```
-
-#### credential.json
-
-``` json
-{
-    "access_token": "8nQ...",
-    "appname": "nms",
-    "authenticated_userid": "user.name@example.com",
-    "created_at": 1663245291,
-    "credential_id": "a7c...",
-    "expires_in": 7200,
-    "id": "6f6...",
-    "refresh_token": "Paa...",
-    "scope": "all",
-    "token_type": "bearer"
-}
-
-```
-
-#### client_id.json
-
-``` json
-{
-    "client_id": "xDj...",
-    "client_secret": "H05..."
-}
-```
 
 ### Simple
 
