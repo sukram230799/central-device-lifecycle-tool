@@ -254,6 +254,8 @@ async def local_firmware_check(cfu: CentralFirmwareUpgrade,
     comm_handler = CommunicationHandler()
 
     await cfu.refresh_gateways(comm_handler=comm_handler)
+    await cfu.refresh_switches(comm_handler=comm_handler)
+    await cfu.refresh_aps(comm_handler=comm_handler)
 
     client_handler = FirmwareUpgradeHandler(cfu,
                                             comm_handler=comm_handler,

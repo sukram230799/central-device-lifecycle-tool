@@ -8,9 +8,18 @@ from decorest import (GET, PATCH, POST, PUT, DELETE, HTTPErrorWrapper,
 
 SKU_TYPE = typing.Literal['GATEWAY', 'AP', 'SWITCH', 'all']
 
+FIRMWARE_DEVICE_TYPE = typing.Literal['IAP', 'MAS', 'HP', 'CONTROLLER', 'CX']
+
 CENTRAL_SERVICES = typing.Literal['pa', 'foundation_switch_6200', 'clarity',
                                   'ucc', 'dm', 'advanced_ap', 'airgroup',
                                   'advance_90xx_sec', 'cloud_guest']
+
+
+class DeviceDetailsSkeleton(typing.NamedTuple):
+    group_name: str
+    serial: str
+    firmware_version: str
+    status: str
 
 
 class UnassignSubscriptionType(typing.TypedDict):
@@ -21,6 +30,10 @@ class UnassignSubscriptionType(typing.TypedDict):
 @backend('httpx')
 @timeout(60)
 class Central(RestClient):
+
+    SKU_TYPE = SKU_TYPE
+    FIRMWARE_DEVICE_TYPE = FIRMWARE_DEVICE_TYPE
+    CENTRAL_SERVICES = CENTRAL_SERVICES
 
     @GET('monitoring/v1/gateways')
     @query('limit')
@@ -69,6 +82,115 @@ class Central(RestClient):
                 'site': None,
                 'status': 'Down',
                 'uptime': 0
+            }]
+        }
+
+    @GET('monitoring/v1/switches')
+    @query('limit')
+    @query('offset')
+    @query('calculate_total')
+    async def get_switches(self,
+                           limit: typing.Union[int, None] = 1000,
+                           offset: typing.Union[int, None] = None,
+                           calculate_total: bool = True) -> typing.Dict:
+        """
+        Get switches You can only specify one of group, label and stack_id parameters.
+        Possible error_codes for the error responses are
+
+        0001 - General Error.
+        0002 - Validation Error. Out of Range value for a query parameter.
+        0003 - Validation Error. Unsupported query combination
+        0004 - Validation Error. Invalid value for a query parameter
+
+        ---
+
+        https://developer.arubanetworks.com/aruba-central/reference/apiexternal_controllerget_switches
+        """
+        # Example
+        return {
+            "count":
+            6,
+            "total":
+            4,
+            "switches": [{
+                "firmware_version": "16.10.0003",
+                "group_name": "unprovisioned",
+                "labels": ["Label1"],
+                "ip_address": "10.22.38.55",
+                "macaddr": "54:80:28:60:2d:a0",
+                "model": "Aruba3810M-24G-PoE+-1-slot Switch(JL073A)",
+                "name": "Aruba-3810M-24G-PoEP-1-slot",
+                "public_ip_address": "10.22.38.55",
+                "serial": "CN80HKW4Z9",
+                "site": "site1",
+                "status": "Up",
+                "uplink_ports": [{
+                    "port": "1/1"
+                }],
+                "usage": 56456456,
+                "stack_id": "01008030-e0cd2100",
+                "switch_type": "AOS-S"
+            }]
+        }
+
+    @GET('monitoring/v2/aps')
+    @query('limit')
+    @query('offset')
+    @query('calculate_total')
+    async def get_aps(self,
+                      limit: typing.Union[int, None] = 1000,
+                      offset: typing.Union[int, None] = None,
+                      calculate_total: bool = True) -> typing.Dict:
+        """
+        Get access points. You can only specify one of group, swarm_id, label, site parameters. Possible error_codes for the error responses are
+
+        0001 - General Error.
+        0002 - Validation Error. Out of Range value for a query parameter.
+        0003 - Validation Error. Unsupported query combination
+        0004 - Validation Error. Invalid value for a query parameter
+        """
+        # Example
+        return {
+            "count":
+            4,
+            "total":
+            10,
+            "aps": [{
+                "serial": "Ap123456",
+                "name": "AP-345",
+                "macaddr": "1a:2s:3d:f3:4f:ge",
+                "swarm_id": "gjhkhguljhlkj12jh767687807676",
+                "group_name": "group1",
+                "ap_group": "ap_group2",
+                "cluster_id": "CN345677",
+                "ap_deployment_mode": "IAP",
+                "status": "Down",
+                "ip_address": "1.1.1.1",
+                "model": "AP-345",
+                "firmware_version": "8.3.0.0_63709",
+                "swarm_master": True,
+                "cpu_utilization": 56,
+                "uptime": 3600,
+                "down_reason": "Disconnected from active controller",
+                "last_modified": 45670089,
+                "mem_total": 80,
+                "mem_free": 20,
+                "mesh_role": "Unknown",
+                "mode": "Auto",
+                "radios": [],
+                "client_count": 3,
+                "ssid_count": 16,
+                "ethernets": [],
+                "modem_connected": True,
+                "current_uplink_inuse": "Ethernet",
+                "public_ip_address": "1.1.1.1",
+                "ip_address_v6": "12df:34tf:76f4:11ad:de45:12ea:11af:31dr",
+                "subnet_mask": "string",
+                "site_name": "string",
+                "swarm_name": "swarm_01",
+                "controller_name": "controller_01",
+                "sys_location": "Hardware Lab",
+                "sys_contact": "Hardwarelab.contact@noreply.com"
             }]
         }
 
@@ -130,10 +252,13 @@ class Central(RestClient):
     @query('device_type')
     @accept('application/json')
     @on(200, lambda r: r.json())
+    @on(404, lambda r: {
+        "compliance_scheduled_at": 0,
+        "firmware_compliance_version": None
+    })
     def get_firmware_compliance(
-        self, group: str, device_type: typing.Literal['IAP', 'MAS', 'HP',
-                                                      'CONTROLLER']
-    ) -> typing.Dict:
+            self, group: str,
+            device_type: FIRMWARE_DEVICE_TYPE) -> typing.Dict:
         """
         To get firmware compliance version for specific device_type, for customer.
 
@@ -159,7 +284,7 @@ class Central(RestClient):
         }
 
     @GET('platform/device_inventory/v1/devices')
-    @timeout(60) # This endpoint is really slow
+    @timeout(60)  # This endpoint is really slow
     @query('sku_type')
     @query('limit')
     @query('offset')

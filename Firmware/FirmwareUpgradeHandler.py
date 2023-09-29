@@ -55,6 +55,8 @@ class FirmwareUpgradeHandler():
             # Device not found locally. BUT force escalation
             # Refresh gateway list
             await self.cfu.refresh_gateways(comm_handler=self.comm_handler)
+            await self.cfu.refresh_switches(comm_handler=self.comm_handler)
+            await self.cfu.refresh_aps(comm_handler=self.comm_handler)
             # Check again if device is in central
             if await self.cfu.is_device_in_central(
                     comm_handler=self.comm_handler, serial=serial):
@@ -147,6 +149,8 @@ class FirmwareUpgradeHandler():
             # Now refresh the gateway list.
             # So that we can see the device with hopefully the correct group
             await self.cfu.refresh_gateways(comm_handler=self.comm_handler)
+            await self.cfu.refresh_switches(comm_handler=self.comm_handler)
+            await self.cfu.refresh_aps(comm_handler=self.comm_handler)
             return  # ABORT for now
 
         # Device is in Central. DONE

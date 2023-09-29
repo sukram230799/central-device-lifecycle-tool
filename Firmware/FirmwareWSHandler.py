@@ -92,6 +92,9 @@ async def handle_fw_websocket(websocket: web.WebSocketResponse, message: str,
             await comm_handler.print_clear()
             await client_handler.cfu.refresh_gateways(comm_handler=comm_handler
                                                       )
+            await client_handler.cfu.refresh_switches(comm_handler=comm_handler
+                                                      )
+            await client_handler.cfu.refresh_aps(comm_handler=comm_handler)
             print(
                 f"{session_parameters['id']} connected from {WebsocketCommunicationHandler.format_address(session_parameters['remote_address'])}"
             )
